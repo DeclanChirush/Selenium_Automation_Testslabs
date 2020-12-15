@@ -23,7 +23,7 @@ public class TestUserLogins {
     private WebDriver beforeMethod() {
         driver = new ChromeDriver();
         driver.get("http://hrm.pragmatictestlabs.com");
-        userLogin();
+        //userLogin();
         return driver;
     }
 
@@ -32,31 +32,42 @@ public class TestUserLogins {
         WebDriverManager.chromedriver().setup();
     }
 
-    private void userLogin() {
+    /*private void userLogin() {
 
         driver.findElement(TXT_USERNAME).sendKeys(USERNAME);
         driver.findElement(TXT_PASSWORD).sendKeys(PASSWORD + Keys.ENTER);
 
-        /**** Different methods to hit Login Button ****/
+        /**** Different methods to hit Login Button
         //driver.findElement(By.id("txtPassword")).submit();
         //driver.findElement(By.id("btnLogin")).click();
         //driver.findElement(By.id("txtPassword")).sendKeys("Ptl@#321" + Keys.ENTER);
-    }
+    } */
 
     @Test
     public void testValidUserLogin() {
+        driver.findElement(TXT_USERNAME).sendKeys(USERNAME);
+        driver.findElement(TXT_PASSWORD).sendKeys(PASSWORD + Keys.ENTER);
+
         String welcomeMsg = driver.findElement(By.id("welcome")).getText();
         Assert.assertEquals(welcomeMsg, "Welcome Admin");
     }
 
     @Test
     public void testValidUserLoginWithoutUsernameAndPassword() {
+
+        driver.findElement(TXT_USERNAME).sendKeys("");
+        driver.findElement(TXT_PASSWORD).sendKeys("" + Keys.ENTER);
+
         String errorMsg = driver.findElement(By.id("spanMessage")).getText();
         Assert.assertEquals(errorMsg, "Username cannot be empty");
     }
 
     @Test
     public void testValidUserLoginWithOnlyUsername() {
+
+        driver.findElement(TXT_USERNAME).sendKeys(USERNAME);
+        driver.findElement(TXT_PASSWORD).sendKeys("" + Keys.ENTER);
+
         String errorMsg = driver.findElement(By.id("spanMessage")).getText();
         Assert.assertEquals(errorMsg, "Password cannot be empty");
     }
@@ -64,12 +75,20 @@ public class TestUserLogins {
 
     @Test
     public void testValidUserLoginWithInvalidCredentials() {
+
+        driver.findElement(TXT_USERNAME).sendKeys("Hirush");
+        driver.findElement(TXT_PASSWORD).sendKeys("123" + Keys.ENTER);
+
         String errorMsg = driver.findElement(By.id("spanMessage")).getText();
         Assert.assertEquals(errorMsg, "Invalid credentials");
     }
 
     @Test
     public void testValidUserLoginWithCaseSensitiveForPassword() {
+
+        driver.findElement(TXT_USERNAME).sendKeys(USERNAME);
+        driver.findElement(TXT_PASSWORD).sendKeys("pTL@#321" + Keys.ENTER);
+
         String errorMsg = driver.findElement(By.id("spanMessage")).getText();
         Assert.assertEquals(errorMsg, "Invalid credentials");
     }
