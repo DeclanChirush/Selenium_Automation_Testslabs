@@ -47,18 +47,16 @@ public class TestAddNewEmployee {
 
     @BeforeMethod
     private WebDriver beforeMethod() {
+        //create faker object
+        faker = new Faker();
         driver = new ChromeDriver();
         driver.get("http://hrm.pragmatictestlabs.com");
-
-        /*** When I add these methods, Chrome browser will open continuously ***/
-        //userLogin();
-        //navigateToAddEmployeePage();
+        userLogin();
+        navigateToAddEmployeePage();
         return driver;
     }
 
     private void userLogin() {
-        driver = beforeMethod();
-
         driver.findElement(TXT_USERNAME).sendKeys(USERNAME);
         driver.findElement(TXT_PASSWORD).sendKeys(PASSWORD);
         driver.findElement(BTN_LOGIN).click();
@@ -80,9 +78,6 @@ public class TestAddNewEmployee {
     @Test
     public void testAddNewEmployee(){
 
-        userLogin();
-        navigateToAddEmployeePage();
-
         driver.findElement(TXT_FIRSTNAME).sendKeys("Hirush");
         driver.findElement(TXT_LASTNAME).sendKeys("Gimhan");
         driver.findElement(BTN_SAVE).click();
@@ -91,9 +86,6 @@ public class TestAddNewEmployee {
 
     @Test
     public void testAddNewEmployeeWithProfilePicture(){
-
-        userLogin();
-        navigateToAddEmployeePage();
 
         driver.findElement(TXT_FIRSTNAME).sendKeys("Hirush");
         driver.findElement(TXT_LASTNAME).sendKeys("Gimhan");
@@ -104,12 +96,6 @@ public class TestAddNewEmployee {
 
     @Test
     public void testAddNewEmployeeWithLoginDetails() {
-
-        userLogin();
-        navigateToAddEmployeePage();
-
-        //create faker object
-        faker = new Faker();
 
         //create random names using faker object
         String firstName = faker.name().firstName();
@@ -129,12 +115,6 @@ public class TestAddNewEmployee {
 
     @Test
     public void testAddNewEmployeeWithLoginDetailsDisabled() {
-
-        userLogin();
-        navigateToAddEmployeePage();
-
-        //create faker object
-        faker = new Faker();
 
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
@@ -160,12 +140,6 @@ public class TestAddNewEmployee {
 
     @Test
     public void testAddNewEmployeeWithLoginDetailsEnabled() {
-
-        userLogin();
-        navigateToAddEmployeePage();
-
-        //create faker object
-        faker = new Faker();
 
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
