@@ -42,13 +42,15 @@ public class TestAddNewEmployee {
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.edgedriver().setup();
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
     private WebDriver beforeMethod() {
-        driver = new EdgeDriver();
+        driver = new ChromeDriver();
         driver.get("http://hrm.pragmatictestlabs.com");
+
+        /*** When I add these methods, Chrome browser will open continuously ***/
         //userLogin();
         //navigateToAddEmployeePage();
         return driver;
@@ -117,6 +119,7 @@ public class TestAddNewEmployee {
         driver.findElement(TXT_FIRSTNAME).sendKeys(firstName);
         driver.findElement(TXT_LASTNAME).sendKeys(lastName);
         driver.findElement(CHECK_LOGIN).click();
+
         driver.findElement(TXT_LOGIN_USERNAME).sendKeys(username);
         driver.findElement(TXT_LOGIN_PASSWORD).sendKeys(PASSWORD);
         driver.findElement(TXT_LOGIN_PASSWORD_CONFIRM).sendKeys(PASSWORD);
@@ -147,6 +150,37 @@ public class TestAddNewEmployee {
 
         status.selectByIndex(0);
         status.selectByValue("Disabled");
+
+        driver.findElement(TXT_LOGIN_USERNAME).sendKeys(username);
+        driver.findElement(TXT_LOGIN_PASSWORD).sendKeys(PASSWORD);
+        driver.findElement(TXT_LOGIN_PASSWORD_CONFIRM).sendKeys(PASSWORD);
+
+        driver.findElement(BTN_SAVE).click();
+    }
+
+    @Test
+    public void testAddNewEmployeeWithLoginDetailsEnabled() {
+
+        userLogin();
+        navigateToAddEmployeePage();
+
+        //create faker object
+        faker = new Faker();
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String username = String.format("%s.%s", firstName, lastName);
+
+        driver.findElement(TXT_FIRSTNAME).sendKeys(firstName);
+        driver.findElement(TXT_LASTNAME).sendKeys(lastName);
+        driver.findElement(CHECK_LOGIN).click();
+
+        //when you have drop down list, you can easily use select class to interact with
+        Select status = new Select(driver.findElement(LAST_STATUS));
+        status.selectByVisibleText("Enabled");
+
+        status.selectByIndex(1);
+        status.selectByValue("Enabled");
 
         driver.findElement(TXT_LOGIN_USERNAME).sendKeys(username);
         driver.findElement(TXT_LOGIN_PASSWORD).sendKeys(PASSWORD);
