@@ -1,12 +1,11 @@
 package com.pragmatic.selenium.pagefactor.pages;
 
-import com.pragmatic.selenium.other.HRMConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPageFactor {
 
     private final WebDriver driver;
 
@@ -23,18 +22,18 @@ public class LoginPage {
     @FindBy(id = "spanMessage")
     WebElement spanMessage;
 
-    public LoginPage(WebDriver driver) {
+    public LoginPageFactor(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
 
 
-    public LoginPage typeUsername(String username) {
+    public LoginPageFactor typeUsername(String username) {
         txtUsername.sendKeys(username);
         return this;
     }
 
-    public LoginPage typePassword(String password) {
+    public LoginPageFactor typePassword(String password) {
         txtPassword.sendKeys(password);
         return this;
     }
@@ -48,12 +47,12 @@ public class LoginPage {
         return errorMessage;
 
     }
-    public LoginPage clearUsername() {
+    public LoginPageFactor clearUsername() {
         txtUsername.clear();
         return this;
     }
 
-    public LoginPage clearPassword() {
+    public LoginPageFactor clearPassword() {
         txtPassword.clear();
         return this;
     }

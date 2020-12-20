@@ -1,8 +1,8 @@
 package com.pragmatic.selenium.pageobject.tests;
 
 import com.pragmatic.selenium.other.HRMConstants;
-import com.pragmatic.selenium.pageobject.pages.LandingPage;
-import com.pragmatic.selenium.pageobject.pages.LoginPage;
+import com.pragmatic.selenium.pageobject.pages.LandingPageObject;
+import com.pragmatic.selenium.pageobject.pages.LoginPageObject;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,58 +32,58 @@ public class TestUserLogin {
     @Test
     public void testValidUserLogin(){
     //Login page object creation
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPageObject loginPageObject = new LoginPageObject(driver);
 
-        loginPage.typeUsername(HRMConstants.USERNAME)
+        loginPageObject.typeUsername(HRMConstants.USERNAME)
                 .typePassword(HRMConstants.PASSWORD)
                 .clickLoginButton();
 
-        LandingPage landingPage = new LandingPage(driver);
+        LandingPageObject landingPageObject = new LandingPageObject(driver);
 
-        Assert.assertEquals(landingPage.getWelcomeMessage(),"Welcome Admin");
+        Assert.assertEquals(landingPageObject.getWelcomeMessage(),"Welcome Admin");
 
     }
     @Test
     public void testUserLoginWithoutUsernameAndPassword(){
         //Login page object creation
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPageObject loginPageObject = new LoginPageObject(driver);
 
-        loginPage.typeUsername("")
+        loginPageObject.typeUsername("")
                 .typePassword("")
                 .clickLoginButton();
 
-        LandingPage landingPage = new LandingPage(driver);
+        LandingPageObject landingPageObject = new LandingPageObject(driver);
 
-        Assert.assertEquals(loginPage.getErrorMsg(),"Username cannot be empty");
+        Assert.assertEquals(loginPageObject.getErrorMsg(),"Username cannot be empty");
 
     }
 
     @Test
     public void testUserLoginWithoutPassword(){
         //Login page object creation
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPageObject loginPageObject = new LoginPageObject(driver);
 
-        loginPage.typeUsername(HRMConstants.USERNAME)
+        loginPageObject.typeUsername(HRMConstants.USERNAME)
                 .typePassword("")
                 .clickLoginButton();
 
-        LandingPage landingPage = new LandingPage(driver);
+        LandingPageObject landingPageObject = new LandingPageObject(driver);
 
-        Assert.assertEquals(loginPage.getErrorMsg(),"Password cannot be empty");
+        Assert.assertEquals(loginPageObject.getErrorMsg(),"Password cannot be empty");
 
     }
     @Test
     public void testUserLoginWithInvalidUsernameAndPassword(){
         //Login page object creation
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPageObject loginPageObject = new LoginPageObject(driver);
 
-        loginPage.typeUsername("user")
+        loginPageObject.typeUsername("user")
                 .typePassword("123")
                 .clickLoginButton();
 
-        LandingPage landingPage = new LandingPage(driver);
+        LandingPageObject landingPageObject = new LandingPageObject(driver);
 
-        Assert.assertEquals(loginPage.getErrorMsg(),"Invalid credentials");
+        Assert.assertEquals(loginPageObject.getErrorMsg(),"Invalid credentials");
 
     }
 

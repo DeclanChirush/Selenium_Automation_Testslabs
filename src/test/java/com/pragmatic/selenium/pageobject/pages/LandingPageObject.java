@@ -4,11 +4,11 @@ import com.pragmatic.selenium.other.HRMConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LandingPage {
+public class LandingPageObject {
 
     private final WebDriver driver;
 
-    public LandingPage(WebDriver driver) {
+    public LandingPageObject(WebDriver driver) {
         this.driver = driver;
     }
 

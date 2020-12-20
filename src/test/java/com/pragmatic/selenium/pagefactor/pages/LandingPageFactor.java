@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+public class LandingPageFactor {
 
     private final WebDriver driver;
 
@@ -14,7 +14,7 @@ public class LandingPage {
     WebElement welcomeMsg;
 
 
-    public LandingPage(WebDriver driver) {
+    public LandingPageFactor(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
